@@ -1,0 +1,50 @@
+﻿@page "/register"
+
+@using static System.Net.WebRequestMethods;
+
+@inject IAuthService AuthService
+@inject HttpClient Http
+@inject ILocalStorageService LocalStorage
+@inject NavigationManager NavigationManager
+
+<h3>Register User</h3>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/" />
+
+    <title>Maleldil</title>
+</head>
+
+<body>
+    <EditForm Model="user" OnSubmit="RegisterNewUser">
+        <div class="form-control">
+            <label for="username">Enter your email...</label>
+            <InputText id="email" @bind-Value="user.Email" class="form-control" />
+        </div>
+        <div class="form-control">
+            <label for="password">Enter Password...</label>
+            <InputText id="password" @bind-Value="user.Password" type="password" />
+        </div>
+        <div class="form-control">
+            <label for="password">Confirm Password...</label>
+            <InputText id="password" @bind-Value="user.ConfirmPassword" type="password" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </EditForm>
+</body>
+</html>
+
+@code {
+    UserDTO user = new();
+
+    async Task RegisterNewUser()
+    {
+        await Http.PostAsJsonAsync("api/auth/register", user);
+
+        NavigationManager.NavigateTo("");
+
+    }
+
+
+}

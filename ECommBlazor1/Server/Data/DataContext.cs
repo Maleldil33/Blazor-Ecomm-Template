@@ -4,6 +4,8 @@
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             modelBuilder.Entity<Category>().HasData(
@@ -33,7 +35,16 @@
                 }
                 );
 
-            modelBuilder.Entity<Product>().HasData(
+                modelBuilder.Entity<User>().HasData(
+                    new User
+                    {
+                        Id = 1,
+                        Email = "Tim.hedin@gmail.com",
+                        PasswordHash = null,
+                        PasswordSalt = null
+                    },
+
+                modelBuilder.Entity<Product>().HasData(
                  new Product
                  {
                      Id = 1,
@@ -88,10 +99,11 @@
                     Price = 19.99m,
                     CategoryId = 4
                 }
-                );
+                ));
         }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

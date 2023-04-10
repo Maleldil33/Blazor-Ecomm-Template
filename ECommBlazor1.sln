@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommBlazor1.Server", "ECommBlazor1\Server\ECommBlazor1.Server.csproj", "{4FD5CD68-9E93-4EC8-920D-28DCF0C9B064}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommBlazor1.Server", "ECommBlazor1\Server\ECommBlazor1.Server.csproj", "{4FD5CD68-9E93-4EC8-920D-28DCF0C9B064}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommBlazor1.Client", "ECommBlazor1\Client\ECommBlazor1.Client.csproj", "{17CEF343-0252-4F74-878C-13C9A28806E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommBlazor1.Client", "ECommBlazor1\Client\ECommBlazor1.Client.csproj", "{17CEF343-0252-4F74-878C-13C9A28806E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommBlazor1.Shared", "ECommBlazor1\Shared\ECommBlazor1.Shared.csproj", "{7718F9D7-CCE5-4C6F-B33E-CAFB0B42BAA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommBlazor1.Shared", "ECommBlazor1\Shared\ECommBlazor1.Shared.csproj", "{7718F9D7-CCE5-4C6F-B33E-CAFB0B42BAA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
