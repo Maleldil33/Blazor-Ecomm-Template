@@ -284,6 +284,20 @@ namespace ECommBlazor1.Server.Migrations
                             ProductTypeId = 5,
                             OriginalPrice = 0m,
                             Price = 19.99m
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            ProductTypeId = 1,
+                            OriginalPrice = 0m,
+                            Price = 19.99m
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            ProductTypeId = 1,
+                            OriginalPrice = 0m,
+                            Price = 29.99m
                         });
                 });
 

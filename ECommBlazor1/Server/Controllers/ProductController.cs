@@ -33,5 +33,21 @@ namespace ECommBlazor1.Server.Controllers
             var result = await _productService.GetProductsByCategory(categoryUrl);
             return Ok(result);
         }
+        [HttpGet]
+        [Route("search/{searchText}")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> SearchProducts(string searchText)
+        {
+            var result = await _productService.GetProductsByCategory(searchText);
+            return Ok(result);  
+        }
+
+        [HttpGet]
+        [Route("searchsuggestions/{searchText}")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProductSearchSuggestions(string searchText)
+        {
+            var result = await _productService.GetProductSearchSuggestions(searchText);
+            return Ok(result);
+        }
+
     }
 }

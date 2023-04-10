@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommBlazor1.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230410092919_UserModelData")]
-    partial class UserModelData
+    [Migration("20230410114036_SeedingMoreProducts")]
+    partial class SeedingMoreProducts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,9 +90,6 @@ namespace ECommBlazor1.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -110,7 +107,6 @@ namespace ECommBlazor1.Server.Migrations
                             CategoryId = 1,
                             Description = "The first two books of 'the book of the new sun' by renowned sci-fi author Gene Wolfe",
                             ImageUrl = "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1600272802l/55077689.jpg",
-                            Price = 9.99m,
                             Title = "Shadow & Claw"
                         },
                         new
@@ -119,7 +115,6 @@ namespace ECommBlazor1.Server.Migrations
                             CategoryId = 1,
                             Description = "C.S. Lewis's signature collection featuring a wide array of his fictional and Christian apolegetic works",
                             ImageUrl = "https://images.thenile.io/r1000/9780007500192.jpg",
-                            Price = 19.99m,
                             Title = "C.S. Lewis - The Signature Collection"
                         },
                         new
@@ -128,7 +123,6 @@ namespace ECommBlazor1.Server.Migrations
                             CategoryId = 2,
                             Description = "A tasty beverage championed by athletes and programmers alike",
                             ImageUrl = "https://www.restockit.com/images/product/xlarge/RDBRBD99124.jpg",
-                            Price = 1.99m,
                             Title = "Red Bull"
                         },
                         new
@@ -137,7 +131,6 @@ namespace ECommBlazor1.Server.Migrations
                             CategoryId = 3,
                             Description = "Classic game for the Nintendo Gamecube",
                             ImageUrl = "https://cdn.mobygames.com/covers/6555565-metroid-prime-gamecube-front-cover.jpg",
-                            Price = 59.99m,
                             Title = "Metroid Prime"
                         },
                         new
@@ -146,7 +139,6 @@ namespace ECommBlazor1.Server.Migrations
                             CategoryId = 3,
                             Description = "Building/Survival game available for many platforms",
                             ImageUrl = "https://cdn.mobygames.com/covers/3364463-minecraft-nintendo-switch-front-cover.jpg",
-                            Price = 9.99m,
                             Title = "Minecraft"
                         },
                         new
@@ -155,8 +147,159 @@ namespace ECommBlazor1.Server.Migrations
                             CategoryId = 4,
                             Description = "This hat is guaranteed to boost your confidence",
                             ImageUrl = "https://stores.wholesalecentral.com/Images/NMJ6J950PK_892KUVGLGLO_CQQQWUF/5297112446201.jpg",
-                            Price = 19.99m,
                             Title = "Cool Hat"
+                        });
+                });
+
+            modelBuilder.Entity("ECommBlazor1.Shared.Models.ProductType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Default"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Paperback"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "E-Book"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Audiobook"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Nintendo Gamecube"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Playstation 1"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "250ml"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "500ml"
+                        });
+                });
+
+            modelBuilder.Entity("ECommBlazor1.Shared.Models.ProductVariant", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("OriginalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("ProductId", "ProductTypeId");
+
+                    b.HasIndex("ProductTypeId");
+
+                    b.ToTable("ProductVariants");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            ProductTypeId = 2,
+                            OriginalPrice = 19.99m,
+                            Price = 9.99m
+                        },
+                        new
+                        {
+                            ProductId = 1,
+                            ProductTypeId = 3,
+                            OriginalPrice = 0m,
+                            Price = 7.99m
+                        },
+                        new
+                        {
+                            ProductId = 1,
+                            ProductTypeId = 4,
+                            OriginalPrice = 29.99m,
+                            Price = 19.99m
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            ProductTypeId = 2,
+                            OriginalPrice = 14.99m,
+                            Price = 7.99m
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            ProductTypeId = 3,
+                            OriginalPrice = 0m,
+                            Price = 6.99m
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            ProductTypeId = 7,
+                            OriginalPrice = 0m,
+                            Price = 3.99m
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            ProductTypeId = 8,
+                            OriginalPrice = 0m,
+                            Price = 9.99m
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            ProductTypeId = 5,
+                            OriginalPrice = 0m,
+                            Price = 19.99m
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            ProductTypeId = 1,
+                            OriginalPrice = 0m,
+                            Price = 19.99m
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            ProductTypeId = 1,
+                            OriginalPrice = 0m,
+                            Price = 29.99m
                         });
                 });
 
@@ -191,6 +334,30 @@ namespace ECommBlazor1.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ECommBlazor1.Shared.Models.ProductVariant", b =>
+                {
+                    b.HasOne("ECommBlazor1.Shared.Models.Product", "Product")
+                        .WithMany("Variants")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommBlazor1.Shared.Models.ProductType", "ProductType")
+                        .WithMany()
+                        .HasForeignKey("ProductTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("ProductType");
+                });
+
+            modelBuilder.Entity("ECommBlazor1.Shared.Models.Product", b =>
+                {
+                    b.Navigation("Variants");
                 });
 #pragma warning restore 612, 618
         }
