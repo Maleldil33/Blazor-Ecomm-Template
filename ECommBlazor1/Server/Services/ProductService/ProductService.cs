@@ -1,4 +1,5 @@
-﻿using ECommBlazor1.Shared.Models;
+﻿using ECommBlazor1.Shared.DTO;
+using ECommBlazor1.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata.Ecma335;
 
@@ -88,11 +89,27 @@ namespace ECommBlazor1.Server.Services.ProductService
 
         }
 
-        public async Task<ServiceResponse<List<Product>>> SearchProducts(string searchText)
+        public async Task<ServiceResponse<ProductSearchResultDTO>> SearchProducts(string searchText, int page)
         {
-            var response = new ServiceResponse<List<Product>>
+            var pageResults = 2f;
+            var pageCount = Math.Ceiling((await FindProductsBySearchText(searchText)).Count / pageResults);
+            var products = await _context.Products
+                                .Where(p => p.Title.ToLower().Equals(searchText.ToLower())
+                                ||
+                                p.Description.ToLower().Contains(searchText.ToLower()))
+                                .Include(p => p.Variants)
+                                .Skip((page - 1) * (int)pageResults)
+                                .Take((int)pageResults)
+                                .ToListAsync();
+
+            var response = new ServiceResponse<ProductSearchResultDTO>
             {
-                Data = await FindProductsBySearchText(searchText)
+                Data = new ProductSearchResultDTO
+                {
+                    Products = products,
+                    CurrentPage = page,
+                    Pages = (int)pageCount
+                }
 
             };
             return response;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ECommBlazor1.Shared.DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommBlazor1.Server.Controllers
@@ -35,9 +36,9 @@ namespace ECommBlazor1.Server.Controllers
         }
         [HttpGet]
         [Route("search/{searchText}")]
-        public async Task<ActionResult<ServiceResponse<List<Product>>>> SearchProducts(string searchText)
+        public async Task<ActionResult<ServiceResponse<ProductSearchResultDTO>>> SearchProducts(string searchText, int page = 1)
         {
-            var result = await _productService.GetProductsByCategory(searchText);
+            var result = await _productService.SearchProducts(searchText, page);
             return Ok(result);  
         }
 
@@ -48,6 +49,8 @@ namespace ECommBlazor1.Server.Controllers
             var result = await _productService.GetProductSearchSuggestions(searchText);
             return Ok(result);
         }
+
+
         [HttpGet]
         [Route("featured")]
         public async Task<ActionResult<ServiceResponse<List<Product>>>> GetFeaturedProducts()
