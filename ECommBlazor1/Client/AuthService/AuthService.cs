@@ -61,7 +61,7 @@ namespace ECommBlazor1.Client.AuthService
                 string response = await result.Content.ReadAsStringAsync();
                 Console.WriteLine(response);
 
-                _navigationManager.NavigateTo("/invoices");
+                _navigationManager.NavigateTo("/");
             }
             catch (Exception e)
             {

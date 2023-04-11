@@ -1,12 +1,24 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@using Microsoft.AspNetCore.Components.Authorization
+<CascadingAuthenticationState>
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+@*        <RouteView RouteData="@routeData" DefaultLayout="@typeof(ShopLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />*@
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(ShopLayout)">
+                <Authorizing>
+                    <text>Authorizing...</text>
+                </Authorizing>
+                <NotAuthorized>
+                    Du har inte tillgång till detta innehåll.
+                </NotAuthorized>
+            </AuthorizeRouteView>
     </Found>
     <NotFound>
         <PageTitle>Not found</PageTitle>
-        <LayoutView Layout="@typeof(MainLayout)">
+        <LayoutView Layout="@typeof(ShopLayout)">
             <p role="alert">Sorry, there's nothing at this address.</p>
         </LayoutView>
     </NotFound>
 </Router>
+</CascadingAuthenticationState>
+

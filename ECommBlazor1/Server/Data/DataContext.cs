@@ -73,7 +73,8 @@
                     Title = "Red Bull",
                     Description = "A tasty beverage championed by athletes and programmers alike",
                     ImageUrl = "https://www.restockit.com/images/product/xlarge/RDBRBD99124.jpg",
-                    CategoryId = 2
+                    CategoryId = 2,
+                    Featured = true
                 },
                 new Product
                 {
@@ -81,7 +82,8 @@
                     Title = "Metroid Prime",
                     Description = "Classic game for the Nintendo Gamecube",
                     ImageUrl = "https://cdn.mobygames.com/covers/6555565-metroid-prime-gamecube-front-cover.jpg",
-                    CategoryId = 3
+                    CategoryId = 3,
+                    Featured = true
                 },
                 new Product
                 {

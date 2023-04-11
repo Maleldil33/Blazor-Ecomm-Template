@@ -1,4 +1,5 @@
 ﻿@page "/"
+@page "/search/{searchText}"
 @page "/{categoryUrl}"
 
 @inject IProductService ProductService
@@ -6,14 +7,43 @@
 
 <PageTitle>Maleldil</PageTitle>
 
-<ProductList></ProductList>
+<Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
+    <NotAuthorized>
+        <center><h5>Welcome, guest!</h5></center>
+    </NotAuthorized>
+    <Authorized>
+        <center><h5>Welcome back, @context.User.Identity.Name!</h5></center>
+    </Authorized>
+</Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
+
+@if(SearchText == null && CategoryUrl == null)
+{
+    <FeaturedProducts />
+}
+else
+{
+    <ProductList></ProductList>
+
+}
+
+
 
 @code{
     [Parameter]
-    public string CategoryUrl { get; set; }
+    public string? CategoryUrl { get; set; } = null;
+    [Parameter]
+    public string? SearchText { get; set; } = null;
 
     protected override async Task OnParametersSetAsync()
     {
+        if(SearchText != null)
+        {
+            await ProductService.SearchProducts(SearchText);
+        }
+        else
+        {
+            await ProductService.GetProducts(CategoryUrl);
+        }
         await ProductService.GetProducts(CategoryUrl);
     }
 }

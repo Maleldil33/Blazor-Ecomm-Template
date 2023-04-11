@@ -1,5 +1,6 @@
 ﻿using ECommBlazor1.Shared.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ECommBlazor1.Server.Services.ProductService
 {
@@ -51,7 +52,7 @@ namespace ECommBlazor1.Server.Services.ProductService
             return response;
         }
 
-        public async Task<ServiceResponse<List<string>>> GetProductSearchSuggestion(string searchText)
+        public async Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText)
         {
             var products = await FindProductsBySearchText(searchText);
 
@@ -107,6 +108,17 @@ namespace ECommBlazor1.Server.Services.ProductService
                                 .ToListAsync();
         }
 
-
+        public async Task<ServiceResponse<List<Product>>> GetFeaturedProducts()
+        {
+            var response = new ServiceResponse<List<Product>>
+            {
+                Data = await _context.Products
+                .Where(p => p.Featured)
+                .Include(p => p.Variants)
+                .ToListAsync()
+            };
+            return response;
+        }
+        
     }
 }
