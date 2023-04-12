@@ -4,6 +4,7 @@ using ECommBlazor1.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommBlazor1.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230411114555_MoreProductSeeding")]
+    partial class MoreProductSeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,33 +157,6 @@ namespace ECommBlazor1.Server.Migrations
                             Featured = false,
                             ImageUrl = "https://stores.wholesalecentral.com/Images/NMJ6J950PK_892KUVGLGLO_CQQQWUF/5297112446201.jpg",
                             Title = "Cool Hat"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 3,
-                            Description = "Survival/social simulation game for the nintendo Gamecube",
-                            Featured = false,
-                            ImageUrl = "https://cdn.mobygames.com/covers/5216426-animal-crossing-gamecube-front-cover.jpg",
-                            Title = "Animal Crossing"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 1,
-                            Description = "Prophetic sci-fi novel by C.S. Lewis. This is the final volume of the space trilogy.",
-                            Featured = false,
-                            ImageUrl = "https://i.pinimg.com/originals/0b/5d/db/0b5ddb6157152090875ab9d181cb51ae.jpg",
-                            Title = "That Hideous Strength"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CategoryId = 1,
-                            Description = "Educational literature for teaching programmers about design patterns often encountered in object oriented programming.",
-                            Featured = false,
-                            ImageUrl = "https://i1.wp.com/springframework.guru/wp-content/uploads/2015/04/9780201633610.jpg?resize=520%2C648",
-                            Title = "Design Patterns for Programmers"
                         });
                 });
 
@@ -332,34 +307,6 @@ namespace ECommBlazor1.Server.Migrations
                         {
                             ProductId = 6,
                             ProductTypeId = 1,
-                            OriginalPrice = 0m,
-                            Price = 29.99m
-                        },
-                        new
-                        {
-                            ProductId = 7,
-                            ProductTypeId = 6,
-                            OriginalPrice = 0m,
-                            Price = 29.99m
-                        },
-                        new
-                        {
-                            ProductId = 8,
-                            ProductTypeId = 6,
-                            OriginalPrice = 0m,
-                            Price = 29.99m
-                        },
-                        new
-                        {
-                            ProductId = 9,
-                            ProductTypeId = 2,
-                            OriginalPrice = 0m,
-                            Price = 29.99m
-                        },
-                        new
-                        {
-                            ProductId = 9,
-                            ProductTypeId = 3,
                             OriginalPrice = 0m,
                             Price = 29.99m
                         });

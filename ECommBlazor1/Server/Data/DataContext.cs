@@ -100,6 +100,30 @@
                     Description = "This hat is guaranteed to boost your confidence",
                     ImageUrl = "https://stores.wholesalecentral.com/Images/NMJ6J950PK_892KUVGLGLO_CQQQWUF/5297112446201.jpg",
                     CategoryId = 4
+                },
+                new Product
+                {
+                    Id = 7,
+                    Title = "Animal Crossing",
+                    Description = "Survival/social simulation game for the nintendo Gamecube",
+                    ImageUrl = "https://cdn.mobygames.com/covers/5216426-animal-crossing-gamecube-front-cover.jpg",
+                    CategoryId = 3
+                },
+                new Product
+                {
+                    Id = 8,
+                    Title = "That Hideous Strength",
+                    Description = "Prophetic sci-fi novel by C.S. Lewis. This is the final volume of the space trilogy.",
+                    ImageUrl = "https://i.pinimg.com/originals/0b/5d/db/0b5ddb6157152090875ab9d181cb51ae.jpg",
+                    CategoryId = 1
+                },
+                new Product
+                {
+                    Id = 9,
+                    Title = "Design Patterns for Programmers",
+                    Description = "Educational literature for teaching programmers about design patterns often encountered in object oriented programming.",
+                    ImageUrl = "https://i1.wp.com/springframework.guru/wp-content/uploads/2015/04/9780201633610.jpg?resize=520%2C648",
+                    CategoryId = 1
                 });
 
             modelBuilder.Entity<ProductVariant>().HasData(
@@ -165,7 +189,32 @@
                     ProductId = 6,
                     ProductTypeId = 1,
                     Price = 29.99m
-                });
+                },
+                new ProductVariant
+                {
+                    ProductId = 7,
+                    ProductTypeId = 6,
+                    Price = 29.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 8,
+                    ProductTypeId = 6,
+                    Price = 29.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 9,
+                    ProductTypeId = 2,
+                    Price = 29.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 9,
+                    ProductTypeId = 3,
+                    Price = 29.99m
+                }
+                );
 
         }
 
