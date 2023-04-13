@@ -124,10 +124,7 @@ namespace ECommBlazor1.Server.Controllers
             }
         }
 
-        // Varje användare tilldelas ett namn som claim som är detsamma som namnet som anges vid reg
-        // och dessutom tilldelas alltid som roll 'user'.
-        // Claims kan användas för att låta programmet att ändra betende mot olika claims
-        // "accountid" används för att indentifiera från vilkte kontonr fakturor ska hämtas
+
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>

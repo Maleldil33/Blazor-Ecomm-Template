@@ -9,9 +9,12 @@ namespace ECommBlazor1.Server.Services.AuthService
         {
             _context = context;
         }
-        public Task<ServiceResponse<int>> Register(string username, string password)
+        public async Task<ServiceResponse<int>> Register(User user, string password)
         {
-            throw new NotImplementedException();
+            if (await UserExists(user.Email))
+            {
+                return new ServiceResponse<int> { Success = true, Message = "User already exists" };
+            }
         }
 
         public async Task<bool> UserExists(string email)
