@@ -14,6 +14,7 @@ namespace ECommBlazor1.Shared.DTO
         public string ProductType { get; set; } = string.Empty;
         public string ImageURL { get; set; } = string.Empty;
         public decimal Price { get; set; }
+        public int Quantity { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using ECommBlazor1.Shared.Models;
 
 namespace ECommBlazor1.Client.Services.CartService
 {
@@ -22,7 +23,17 @@ namespace ECommBlazor1.Client.Services.CartService
             {
                 cart = new List<CartItem>();
             }
-            cart.Add(cartItem);
+
+            var sameItem = cart.Find(x => x.ProductId == cartItem.ProductId &&
+                x.ProductTypeId == cartItem.ProductTypeId);
+            if(sameItem == null)
+            {
+                cart.Add(cartItem);
+            }
+            else
+            {
+                sameItem.Quantity += cartItem.Quantity;
+            }            
 
             await _localStorage.SetItemAsync("cart", cart);
             OnChange.Invoke();
@@ -64,6 +75,24 @@ namespace ECommBlazor1.Client.Services.CartService
                 await _localStorage.SetItemAsync("cart", cart);
                 OnChange.Invoke();
             }
+        }
+
+        public async Task UpdateQuantity(CartProductDTO product)
+        {
+            var cart = await _localStorage.GetItemAsync<List<CartItem>>("cart");
+            if (cart == null)
+            {
+                return;
+            }
+
+            var cartItem = cart.Find(x => x.ProductId == product.ProductId
+                && x.ProductTypeId == product.ProductTypeId);
+            if (cartItem != null)
+            {
+                cartItem.Quantity = product.Quantity;
+                await _localStorage.SetItemAsync("cart", cart);                
+            }
+
         }
     }
 }

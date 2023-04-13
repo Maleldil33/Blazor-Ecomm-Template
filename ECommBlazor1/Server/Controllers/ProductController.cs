@@ -35,7 +35,7 @@ namespace ECommBlazor1.Server.Controllers
             return Ok(result);
         }
         [HttpGet]
-        [Route("search/{searchText}")]
+        [Route("search/{searchText}/{page}")]
         public async Task<ActionResult<ServiceResponse<ProductSearchResultDTO>>> SearchProducts(string searchText, int page = 1)
         {
             var result = await _productService.SearchProducts(searchText, page);

@@ -10,7 +10,7 @@ namespace ECommBlazor1.Client.AuthService
         List<User> Users { get; set; }
         Task GetUsers(); 
         Task <ActionResult<User>> RegisterUser(UserDTO request);
-        Task<ActionResult<User>> LoginUser(UserDTO request);
+        Task<ActionResult<User>> LoginUser(UserDTO request);        
 
     }
 }

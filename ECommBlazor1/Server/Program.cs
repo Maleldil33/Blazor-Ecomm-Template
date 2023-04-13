@@ -5,6 +5,7 @@ global using Microsoft.EntityFrameworkCore;
 global using ECommBlazor1.Server.Services.ProductService;
 global using ECommBlazor1.Server.Services.CategoryService;
 global using ECommBlazor1.Server.Services.CartService;
+global using ECommBlazor1.Server.Services.AuthService;
 
 using Microsoft.AspNetCore.ResponseCompression;
 
@@ -27,6 +28,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 
 
 

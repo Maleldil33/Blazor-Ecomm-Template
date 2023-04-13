@@ -124,7 +124,32 @@
                     Description = "Educational literature for teaching programmers about design patterns often encountered in object oriented programming.",
                     ImageUrl = "https://i1.wp.com/springframework.guru/wp-content/uploads/2015/04/9780201633610.jpg?resize=520%2C648",
                     CategoryId = 1
-                });
+                },
+                new Product
+                {
+                    Id = 10,
+                    Title = "King James Bible",
+                    Description = "The king James holy bible in beautiful bound leather.",
+                    ImageUrl = "https://tvaraj.files.wordpress.com/2012/10/the-holy-bible.jpg",
+                    CategoryId = 1,
+                    Featured = true
+                },
+                new Product
+                {
+                    Id = 11,
+                    Title = "Dispelling Wetiko",
+                    Description = "A book you should read if you want to understand the global psychosis we're currently living through by Paul Levy",
+                    ImageUrl = "https://cdn2.penguin.com.au/covers/original/9781583945483.jpg",
+                    CategoryId = 1
+                },
+                new Product
+                {
+                    Id = 12,
+                    Title = "Meditations",
+                    Description = "Meditations by Marcus Aurelius",
+                    ImageUrl = "https://i.thenile.io/r1000/9781543286700.jpg?r=5f83a98257416",
+                    CategoryId = 1
+                });;
 
             modelBuilder.Entity<ProductVariant>().HasData(
                 new ProductVariant
@@ -213,6 +238,44 @@
                     ProductId = 9,
                     ProductTypeId = 3,
                     Price = 29.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 10,
+                    ProductTypeId = 2,
+                    Price = 29.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 10,
+                    ProductTypeId = 3,
+                    Price = 19.99m
+                }
+                ,
+                new ProductVariant
+                {
+                    ProductId = 11,
+                    ProductTypeId = 2,
+                    Price = 19.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 11,
+                    ProductTypeId = 3,
+                    Price = 19.99m
+                }
+                ,
+                new ProductVariant
+                {
+                    ProductId = 12,
+                    ProductTypeId = 2,
+                    Price = 17.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 12,
+                    ProductTypeId = 3,
+                    Price = 12.99m
                 }
                 );
 

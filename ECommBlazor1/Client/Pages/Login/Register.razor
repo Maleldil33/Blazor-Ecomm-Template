@@ -17,7 +17,8 @@
 </head>
 
 <body>
-    <EditForm Model="user" OnSubmit="RegisterNewUser">
+    <EditForm Model="user" OnValidSubmit="RegisterNewUser">
+        
         <div class="form-control">
             <label for="username">Enter your email...</label>
             <InputText id="email" @bind-Value="user.Email" class="form-control" />
@@ -31,6 +32,7 @@
             <InputText id="password" @bind-Value="user.ConfirmPassword" type="password" />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        
     </EditForm>
 </body>
 </html>
