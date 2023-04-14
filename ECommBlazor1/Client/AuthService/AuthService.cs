@@ -12,12 +12,14 @@ namespace ECommBlazor1.Client.AuthService
         
         private ILocalStorageService LocalStorage;
         private readonly HttpClient _http;
-        private readonly NavigationManager _navigationManager;        
+        private readonly NavigationManager _navigationManager;
+        private readonly AuthenticationStateProvider _authStateProvider;
 
-        public AuthService(HttpClient http, NavigationManager navigationManager)
+        public AuthService(HttpClient http, NavigationManager navigationManager, AuthenticationStateProvider authStateProvider)
         {
             _http = http;
-            _navigationManager = navigationManager;            
+            _navigationManager = navigationManager;
+            _authStateProvider = authStateProvider;
         }
 
         public User User { get; set; } = new User();
@@ -28,30 +30,27 @@ namespace ECommBlazor1.Client.AuthService
             string token = await LocalStorage.GetItemAsync<string>("token"); 
         }
 
-        public async Task<ActionResult<User>> RegisterUser(UserDTO request)
+        public async Task<ServiceResponse<bool>> ChangePassword(UserChangePassword request)
         {
-            var result = await _http.PostAsJsonAsync("api/auth/register", request);
-            await SetUsers(result);
-
-            return await result.Content.ReadFromJsonAsync<User>();
+            var result = await _http.PostAsJsonAsync("api/auth/change-password", request.Password);
+            return await result.Content.ReadFromJsonAsync<ServiceResponse<bool>>();
         }
 
-        public async Task GetUsers()
+        public async Task<bool> IsUserAuthenticated()
         {
-            var result = await _http.GetFromJsonAsync<List<User>>("api/auth");
-            if (result == null)          
-            
-            Users = result;            
-
+            return (await _authStateProvider.GetAuthenticationStateAsync()).User.Identity.IsAuthenticated;
         }
 
-        public async Task<ActionResult<User>> LoginUser(UserDTO request)
+        public async Task<ServiceResponse<string>> Login(UserLoginDTO request)
         {
             var result = await _http.PostAsJsonAsync("api/auth/login", request);
-
-            return await result.Content.ReadFromJsonAsync<User>();
-
-        }        
+            return await result.Content.ReadFromJsonAsync<ServiceResponse<string>>();
+        }
+        public async Task<ServiceResponse<int>> Register(UserRegisterDTO request)
+        {
+            var result = await _http.PostAsJsonAsync("api/auth/register", request);
+            return await result.Content.ReadFromJsonAsync<ServiceResponse<int>>();
+        }
 
 
         private async Task SetUsers(HttpResponseMessage result)

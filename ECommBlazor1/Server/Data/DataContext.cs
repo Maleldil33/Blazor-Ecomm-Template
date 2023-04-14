@@ -286,5 +286,7 @@
         public DbSet<User> Users { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+
     }
 }

@@ -7,10 +7,10 @@ namespace ECommBlazor1.Client.AuthService
 {
     public interface IAuthService
     {
-        List<User> Users { get; set; }
-        Task GetUsers(); 
-        Task <ActionResult<User>> RegisterUser(UserDTO request);
-        Task<ActionResult<User>> LoginUser(UserDTO request);        
+        Task<ServiceResponse<int>> Register(UserRegisterDTO request);
+        Task<ServiceResponse<string>> Login(UserLoginDTO request);
+        Task<ServiceResponse<bool>> ChangePassword(UserChangePassword request);
+        Task<bool> IsUserAuthenticated();
 
     }
 }

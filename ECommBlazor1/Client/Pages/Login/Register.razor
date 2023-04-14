@@ -32,19 +32,28 @@
             <InputText id="password" @bind-Value="user.ConfirmPassword" type="password" />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="text-danger">
+            <span>@message</span>
+        </div>
         
     </EditForm>
 </body>
 </html>
 
 @code {
-    UserDTO user = new();
+    UserRegisterDTO user = new();
+
+    string message = string.Empty;
+    string messageCssClass = string.Empty;
 
     async Task RegisterNewUser()
     {
-        await Http.PostAsJsonAsync("api/auth/register", user);
-
-        NavigationManager.NavigateTo("");
+        var result = await AuthService.Register(user);
+        message = result.Message;
+        if (result.Success)
+            messageCssClass = "text-success";
+        else
+            messageCssClass = "text-danger";
 
     }
 

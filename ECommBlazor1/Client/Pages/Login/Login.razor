@@ -11,18 +11,19 @@
 @using ECommBlazor1.Shared.DTO;
 @using System.Security.Claims;
 @using ECommBlazor1.Client.Shared;
+@using Microsoft.AspNetCore.WebUtilities;
 
 @inject HttpClient Http
 @inject ILocalStorageService LocalStorage
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider CustomAuthStateProvider
-@inject IAuthService Authservice
+@inject IAuthService AuthService
 
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="~/" />
 
-    <title>NBS Mina Sidor</title>
+    <title>My Shop</title>
 </head>
 
 <body>
@@ -45,18 +46,38 @@
 
     private IEnumerable<Claim> claims = Enumerable.Empty<Claim>();
 
-    private UserDTO user = new UserDTO();
+    private UserLoginDTO user = new UserLoginDTO();
+
+    private string errorMessage = string.Empty;
+
+    private string returnUrl = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("returnUrl", out var url))
+        {
+            returnUrl = url;
+        }
+    }
 
     protected async Task LogIn()
     {
-        var result = await Http.PostAsJsonAsync("api/auth/login", user);
+        var result = await AuthService.Login(user);
+        if (result.Success)
+        {
+            errorMessage = string.Empty;
 
-        var token = await result.Content.ReadAsStringAsync();
-        Console.WriteLine(token);
-        await LocalStorage.SetItemAsync("token", token);
-        await CustomAuthStateProvider.GetAuthenticationStateAsync();
-
-        NavigationManager.NavigateTo("/");
+            await LocalStorage.SetItemAsync("token", result.Data);
+            await CustomAuthStateProvider.GetAuthenticationStateAsync();
+            await CartService.StoreCartItems(true);
+            await CartService.GetCartItemsCount();
+            NavigationManager.NavigateTo(returnUrl);
+        }
+        else
+        {
+            errorMessage = result.Message;
+        }
 
     }
 
