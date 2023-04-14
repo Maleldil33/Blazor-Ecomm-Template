@@ -16,7 +16,7 @@
 @inject HttpClient Http
 @inject ILocalStorageService LocalStorage
 @inject NavigationManager NavigationManager
-@inject AuthenticationStateProvider CustomAuthStateProvider
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IAuthService AuthService
 
 <html>
@@ -39,6 +39,10 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </EditForm>
+        <div class="text-danger>">
+            <span>@errorMessage</span>
+        </div>
+
 </body>
 </html>
 
@@ -69,7 +73,7 @@
             errorMessage = string.Empty;
 
             await LocalStorage.SetItemAsync("authToken", result.Data);
-            await CustomAuthStateProvider.GetAuthenticationStateAsync();
+            await AuthenticationStateProvider.GetAuthenticationStateAsync();
             //await CartService.StoreCartItems(true);
             //await CartService.GetCartItemsCount();
             NavigationManager.NavigateTo(returnUrl);
@@ -84,7 +88,7 @@
     protected async Task Logout()
     {
         await LocalStorage.RemoveItemAsync("authToken");
-        await CustomAuthStateProvider.GetAuthenticationStateAsync();
+        await AuthenticationStateProvider.GetAuthenticationStateAsync();
     }
 
 }

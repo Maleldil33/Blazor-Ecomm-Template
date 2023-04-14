@@ -42,7 +42,7 @@ namespace ECommBlazor1.Server.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserRegisterDTO request)
+        public async Task<ActionResult<string>> Login(UserLoginDTO request)
         {
             var response = await _authService.Login(request.Email, request.Password);
             if (!response.Success)

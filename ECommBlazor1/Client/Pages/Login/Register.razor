@@ -2,6 +2,7 @@
 
 @using static System.Net.WebRequestMethods;
 
+
 @inject IAuthService AuthService
 @inject HttpClient Http
 @inject ILocalStorageService LocalStorage
@@ -18,10 +19,11 @@
 
 <body>
     <EditForm Model="user" OnValidSubmit="RegisterNewUser">
-        
+        <DataAnnotationsValidator />
         <div class="form-control">
             <label for="username">Enter your email...</label>
             <InputText id="email" @bind-Value="user.Email" class="form-control" />
+            
         </div>
         <div class="form-control">
             <label for="password">Enter Password...</label>
@@ -41,7 +43,7 @@
 </html>
 
 @code {
-    UserRegisterDTO user = new();
+    UserRegisterDTO user = new UserRegisterDTO();
 
     string message = string.Empty;
     string messageCssClass = string.Empty;
