@@ -28,7 +28,7 @@
 
 <body>
         
-        <EditForm Model="user" OnSubmit="LogIn">
+        <EditForm Model="user" OnSubmit="LogIn">            
             <div class="form-control">
                 <label for="username">Enter Email...</label>
                 <InputText id="email" @bind-Value="user.Email" class="form-control"/>
@@ -68,10 +68,10 @@
         {
             errorMessage = string.Empty;
 
-            await LocalStorage.SetItemAsync("token", result.Data);
+            await LocalStorage.SetItemAsync("authToken", result.Data);
             await CustomAuthStateProvider.GetAuthenticationStateAsync();
-            await CartService.StoreCartItems(true);
-            await CartService.GetCartItemsCount();
+            //await CartService.StoreCartItems(true);
+            //await CartService.GetCartItemsCount();
             NavigationManager.NavigateTo(returnUrl);
         }
         else
@@ -83,7 +83,7 @@
 
     protected async Task Logout()
     {
-        await LocalStorage.RemoveItemAsync("Jwt: Token");
+        await LocalStorage.RemoveItemAsync("authToken");
         await CustomAuthStateProvider.GetAuthenticationStateAsync();
     }
 

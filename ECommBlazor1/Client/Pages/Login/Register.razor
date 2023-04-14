@@ -51,7 +51,12 @@
         var result = await AuthService.Register(user);
         message = result.Message;
         if (result.Success)
-            messageCssClass = "text-success";
+        {           
+        
+        messageCssClass = "text-success";
+            await Task.Delay(1000);
+            NavigationManager.NavigateTo("/");
+        }
         else
             messageCssClass = "text-danger";
 

@@ -19,41 +19,35 @@ namespace ECommBlazor1.Client.AuthService
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            await Task.Delay(1000);
-
-            string token = await _localStorageService.GetItemAsStringAsync("token");                     
+            string authToken = await _localStorageService.GetItemAsStringAsync("authToken");
 
             var identity = new ClaimsIdentity();
             _http.DefaultRequestHeaders.Authorization = null;
 
-            if (!string.IsNullOrEmpty(token))
+            if (!string.IsNullOrEmpty(authToken))
             {
-                identity = new ClaimsIdentity(ParseClaimsFromJwt(token), "jwt");
-                _http.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", token.Replace("\"", ""));
+                try
+                {
+                    identity = new ClaimsIdentity(ParseClaimsFromJwt(authToken), "jwt");
+                    _http.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", authToken.Replace("\"", ""));
+                }
+                catch
+                {
+                    await _localStorageService.RemoveItemAsync("authToken");
+                    identity = new ClaimsIdentity();
+                }
             }
 
             var user = new ClaimsPrincipal(identity);
-            var authState = new AuthenticationState(user);
+            var state = new AuthenticationState(user);
 
-            NotifyAuthenticationStateChanged(Task.FromResult(authState));
+            NotifyAuthenticationStateChanged(Task.FromResult(state));
 
-            return authState;
-
+            return state;
         }
 
-        public static IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
-        {
-            var payload = jwt.Split('.')[1];
-            var jsonBytes = ParseBase64WithoutPadding(payload);
-            var keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
-            
-            var claims = keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString()));
-
-            return claims;
-        }
-
-        private static byte[] ParseBase64WithoutPadding(string base64)
+        private byte[] ParseBase64WithoutPadding(string base64)
         {
             switch (base64.Length % 4)
             {
@@ -63,5 +57,16 @@ namespace ECommBlazor1.Client.AuthService
             return Convert.FromBase64String(base64);
         }
 
+        private IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
+        {
+            var payload = jwt.Split('.')[1];
+            var jsonBytes = ParseBase64WithoutPadding(payload);
+            var keyValuePairs = JsonSerializer
+                .Deserialize<Dictionary<string, object>>(jsonBytes);
+
+            var claims = keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString()));
+
+            return claims;
+        }
     }
 }
