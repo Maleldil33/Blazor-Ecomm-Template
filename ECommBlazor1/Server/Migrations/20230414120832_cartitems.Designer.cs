@@ -4,6 +4,7 @@ using ECommBlazor1.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommBlazor1.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230414120832_cartitems")]
+    partial class cartitems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -275,15 +277,6 @@ namespace ECommBlazor1.Server.Migrations
                             Featured = false,
                             ImageUrl = "https://i.thenile.io/r1000/9781543286700.jpg?r=5f83a98257416",
                             Title = "Meditations"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CategoryId = 4,
-                            Description = "Certified hustler sneaks for making money or just posting up and lookin' fly.",
-                            Featured = true,
-                            ImageUrl = "https://assets.bigcartel.com/product_images/353466343/shoe+product+shot.png?auto=format&fit=max&w=1300",
-                            Title = "Da Bob"
                         });
                 });
 
@@ -343,16 +336,6 @@ namespace ECommBlazor1.Server.Migrations
                         {
                             Id = 8,
                             Name = "500ml"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "size 10"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "size 11"
                         });
                 });
 
@@ -516,20 +499,6 @@ namespace ECommBlazor1.Server.Migrations
                             ProductTypeId = 3,
                             OriginalPrice = 0m,
                             Price = 12.99m
-                        },
-                        new
-                        {
-                            ProductId = 13,
-                            ProductTypeId = 9,
-                            OriginalPrice = 0m,
-                            Price = 149.99m
-                        },
-                        new
-                        {
-                            ProductId = 13,
-                            ProductTypeId = 10,
-                            OriginalPrice = 0m,
-                            Price = 149.99m
                         });
                 });
 

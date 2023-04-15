@@ -1,4 +1,6 @@
-﻿namespace ECommBlazor1.Server.Data
+﻿using ECommBlazor1.Client.Pages;
+
+namespace ECommBlazor1.Server.Data
 {
     public class DataContext : DbContext
     {
@@ -8,6 +10,9 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CartItem>()
+                .HasKey(ci => new { ci.UserId, ci.ProductId, ci.ProductTypeId });
+
             modelBuilder.Entity<ProductVariant>()
                 .HasKey(p => new { p.ProductId, p.ProductTypeId });
 
@@ -19,7 +24,10 @@
                 new ProductType { Id = 5, Name = "Nintendo Gamecube" },
                 new ProductType { Id = 6, Name = "Playstation 1" },
                 new ProductType { Id = 7, Name = "250ml" },
-                new ProductType { Id = 8, Name = "500ml" }
+                new ProductType { Id = 8, Name = "500ml" },
+                new ProductType { Id = 9, Name = "size 10" },
+                new ProductType { Id = 10, Name = "size 11" }
+
 
             );
 
@@ -149,7 +157,16 @@
                     Description = "Meditations by Marcus Aurelius",
                     ImageUrl = "https://i.thenile.io/r1000/9781543286700.jpg?r=5f83a98257416",
                     CategoryId = 1
-                });;
+                },
+                new Product
+                {
+                    Id = 13,
+                    Title = "Da Bob",
+                    Description = "Certified hustler sneaks for making money or just posting up and lookin' fly.",
+                    ImageUrl = "https://assets.bigcartel.com/product_images/353466343/shoe+product+shot.png?auto=format&fit=max&w=1300",
+                    CategoryId = 4,
+                    Featured = true
+                });
 
             modelBuilder.Entity<ProductVariant>().HasData(
                 new ProductVariant
@@ -276,6 +293,18 @@
                     ProductId = 12,
                     ProductTypeId = 3,
                     Price = 12.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 13,
+                    ProductTypeId = 9,
+                    Price = 149.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 13,
+                    ProductTypeId = 10,
+                    Price = 149.99m
                 }
                 );
 
@@ -287,6 +316,8 @@
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+
 
     }
 }

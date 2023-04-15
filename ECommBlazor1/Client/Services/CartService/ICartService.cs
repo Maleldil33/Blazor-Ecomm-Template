@@ -10,6 +10,7 @@ namespace ECommBlazor1.Client.Services.CartService
         Task<List<CartProductDTO>> GetCartProducts();
         Task RemoveProductFromCart(int productId, int productTypeId);
         Task UpdateQuantity(CartProductDTO product);
+        Task StoreCartItems(bool emptyLocalCart);
 
 
     }

@@ -1,6 +1,7 @@
 ﻿using ECommBlazor1.Shared.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ECommBlazor1.Server.Controllers
 {
@@ -19,6 +20,14 @@ namespace ECommBlazor1.Server.Controllers
         public async Task<ActionResult<ServiceResponse<List<CartProductDTO>>>> GetCartProducts(List<CartItem> cartItems)
         {
             var result = await _cartService.GetCartProducts(cartItems);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ServiceResponse<List<CartProductDTO>>>> StoreCartItems(List<CartItem> cartItems)
+        {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var result = await _cartService.StoreCartItems(cartItems, userId);
             return Ok(result);
         }
 
