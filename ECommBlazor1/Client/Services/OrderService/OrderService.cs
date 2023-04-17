@@ -15,6 +15,12 @@ namespace ECommBlazor1.Client.Services.OrderService
             _navigationManager = navigationManager;
         }
 
+        public async Task<OrderDetailsResponse> GetOrderDetails(int orderId)
+        {
+            var result = await _http.GetFromJsonAsync<ServiceResponse<OrderDetailsResponse>>($"api/order/{orderId}");
+            return result.Data;
+        }
+
         public async Task<List<OrderOverviewDTO>> GetOrders()
         {
             var result = await _http.GetFromJsonAsync<ServiceResponse<List<OrderOverviewDTO>>>("api/order");
