@@ -8,6 +8,7 @@ global using ECommBlazor1.Server.Services.CartService;
 global using ECommBlazor1.Server.Services.AuthService;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.IdentityModel.Tokens;
+global using ECommBlazor1.Server.Services.OrderService;
 
 using Microsoft.AspNetCore.ResponseCompression;
 
@@ -31,6 +32,8 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

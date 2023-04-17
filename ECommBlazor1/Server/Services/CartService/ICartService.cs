@@ -10,6 +10,7 @@ namespace ECommBlazor1.Server.Services.CartService
         Task<ServiceResponse<List<CartProductDTO>>> GetDbCartProducts();
         Task<ServiceResponse<bool>> AddToCart(CartItem cartItem);
         Task<ServiceResponse<bool>> UpdateQuantity(CartItem cartItem);
+        Task<ServiceResponse<bool>> RemoveItemFromCart(int productId, int productTypeId);
 
     }
 }

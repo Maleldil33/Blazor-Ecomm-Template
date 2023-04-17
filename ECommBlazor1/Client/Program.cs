@@ -7,6 +7,7 @@ global using ECommBlazor1.Shared.DTO;
 global using ECommBlazor1.Client.AuthService;
 global using Microsoft.AspNetCore.Components.Authorization;
 global using ECommBlazor1.Client.Services.CartService;
+global using ECommBlazor1.Client.Services.OrderService;
 
 
 using ECommBlazor1.Client;
@@ -24,6 +25,8 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+
 builder.Services.AddOptions();
 builder.Services.AddAuthenticationCore();
 builder.Services.AddAuthorizationCore();
