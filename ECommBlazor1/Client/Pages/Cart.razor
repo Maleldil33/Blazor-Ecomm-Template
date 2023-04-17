@@ -35,7 +35,7 @@ else
 }
 
 @code {
-    
+
 
     List<CartProductDTO> cartProducts = null;
     string message = "Loading cart...";
@@ -54,15 +54,15 @@ else
 
     private async Task LoadCart()
     {
-        if ((await CartService.GetCartItems()).Count == 0)
+        await CartService.GetCartItemsCount();
+        cartProducts = await CartService.GetCartProducts();
+
+        if (cartProducts == null || cartProducts.Count == 0)
         {
             message = "Cart is Empty...";
-            cartProducts = new List<CartProductDTO>();
+            
         }
-        else
-        {
-            cartProducts = await CartService.GetCartProducts();
-        }
+
     }
 
     private async Task UpdateQuantity(ChangeEventArgs e, CartProductDTO product)
